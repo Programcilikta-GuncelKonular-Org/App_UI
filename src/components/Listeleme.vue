@@ -1,5 +1,5 @@
 <template>
-  <h1 v-for="(eleman, index) in elemanlar" :key="index">
+  <h1 v-for="eleman in elemanlar" :key="eleman">
       {{eleman.bilgiMetni}}
   </h1>
 </template>
