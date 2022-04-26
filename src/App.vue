@@ -3,15 +3,15 @@
   <!-- <div class="container-md border viewCss"> -->
   <div class="container deneme">
     <div class="row">
-      <div class="col-1"></div>
+      <div class="col-2"></div>
 
       <div class="col-8 customPadding">
         <router-view />
       </div>
 
-      <div class="col-3 customPadding">
-        <div class="container bg-light onlineKullanici">
-          <h5 class="text-center ">
+      <div class="col-2 customPadding">
+        <div class="container bg-light onlineKullanici pb-3">
+          <h5 class="text-center pt-3">
             <b>Online Kullanıcılar</b>
             </h5>
           <ul class="list-group">
