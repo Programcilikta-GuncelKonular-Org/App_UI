@@ -1,10 +1,11 @@
 import { createStore } from "vuex";
+import bilgilerModule from "./modules/bilgiler"
 
 const store = createStore({
-  // modules: {
-  //   bilgiler,
-  //   auth,
-  // },
+  modules: {
+    bilgiler: bilgilerModule,
+    // auth,
+  },
 });
 
 export default store;

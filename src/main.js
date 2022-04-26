@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
 import NavBar from "@/components/layout/NavBar.vue";
+import Card_v from "@/components/ui/Card";
 
 const app = createApp(App);
 
@@ -19,4 +20,5 @@ app
   .use(router)
   .component("font-awesome-icon", FontAwesomeIcon)
   .component("NavBar", NavBar)
+  .component("CardView", Card_v)
   .mount("#app");
