@@ -18,9 +18,12 @@ export default {
     async paylasimlariAl() {
       try {
         await this.$store.dispatch("bilgiler/BilgileriAl");
+        /**
+         * getter kullanımı
+         * this.elemanlarList = this.$store.getters["bilgiler/paylasimlariGetir"]*/
         this.elemanlarList = this.$store.state.bilgiler.storePaylasimlar;
       } catch (err) {
-        console.log(err);
+        console.log("hata oluştu", err);
       }
     },
   },

@@ -4,9 +4,10 @@ const paylasimlariGetir = async () => {
   return await fetch(`${BASE_URL}api/bilgiler`)
     .then(async (response) => {
       if (response.status === 200) {
-        const deneme = await response.json();
-        console.warn(deneme);
-        return await response.json(); //parse
+        /**
+         * burada tekrardan bekletmeye gerek yok
+         * return await response.json();*/
+        return response.json(); //parse
       }
     })
     .catch((err) => {
