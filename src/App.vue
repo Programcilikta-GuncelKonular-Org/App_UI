@@ -22,10 +22,66 @@
           </ul>
         </div>
       </div>
-      <div class="col-2"></div>
+      <div class="col-2">
+        
+        <!-- Online kullanıcılar(fikir!) 
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary position-relative dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Inbox
+            <span
+              class="
+                position-absolute
+                top-0
+                start-100
+                translate-middle
+                badge
+                rounded-pill
+                bg-danger
+              "
+            >
+              {{ kisiSayisi }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </button>
+          <ul class="dropdown-menu">
+            <li
+              v-for="(kisi, index) in onlineKisiler"
+              :key="kisi.kAdi"
+              @click="Goruntulendi(index)"
+            >
+              <a class="dropdown-item" href="#">{{ kisi.kAdi }}</a>
+            </li>
+          </ul>
+        </div> -->
+      </div>
     </div>
   </div>
 </template>
+
+// <script>
+// export default {
+//   data() {
+//     return {
+//       onlineKisiler: [{ kAdi: "Can" }, { kAdi: "Cem" }, { kAdi: "Kerem" }],
+//     };
+//   },
+//   methods: {
+//     Goruntulendi(e) {
+//       this.onlineKisiler.splice(e, 1);
+//     },
+//   },
+//   computed: {
+//     kisiSayisi() {
+//       return this.onlineKisiler.length;
+//     },
+//   },
+// };
+// </script>
 
 <style lang="scss">
 .deneme {
