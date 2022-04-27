@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-2"></div>
 
-      <div class="col-8 customPadding">
+      <div class="col-6 customPadding">
         <router-view />
       </div>
 
@@ -13,7 +13,7 @@
         <div class="container bg-light onlineKullanici pb-3">
           <h5 class="text-center pt-3">
             <b>Online Kullanıcılar</b>
-            </h5>
+          </h5>
           <ul class="list-group">
             <div class="container"></div>
             <li class="list-group-item">Kullanıcı 1</li>
@@ -22,6 +22,7 @@
           </ul>
         </div>
       </div>
+      <div class="col-2"></div>
     </div>
   </div>
 </template>
@@ -58,7 +59,8 @@
 }
 
 .customPadding {
-  padding-top: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
 }
 
 .onlineKullanici {
