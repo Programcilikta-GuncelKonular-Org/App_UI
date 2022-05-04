@@ -1,13 +1,10 @@
-const BASE_URL = "http://localhost:3002/";
+const BASE_URL = "http://localhost:9000/";
 
 const paylasimlariGetir = async () => {
   return await fetch(`${BASE_URL}api/bilgiler`)
     .then(async (response) => {
       if (response.status === 200) {
-        /**
-         * burada tekrardan bekletmeye gerek yok
-         * return await response.json();*/
-        return response.json(); //parse
+        return await response.json();//parse
       }
     })
     .catch((err) => {

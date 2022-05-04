@@ -8,7 +8,7 @@ export default {
       })
       .catch((err) => {
         context.commit("PaylasimDepola", err);
-        throw new Error();
+        throw new Error(err);
       });
   },
 };
