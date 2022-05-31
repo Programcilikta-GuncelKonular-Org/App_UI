@@ -11,8 +11,8 @@ export default {
   },
   methods: {
     GirisYap(e) {
-      this.$store.dispatch("auth/KullaniciGirisi", e).then((res) => {
-        alert(res);
+      this.$store.dispatch("auth/KullaniciGirisi", e).then(() => {
+        // this.$router.push("/listele"); yönlenme olacak
       });
     },
   },
