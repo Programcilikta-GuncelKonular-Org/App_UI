@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
-      kullanici: {},
+      kullanici: null, //{}=> boş da olsa bir instance var demek, bu şaşırtıyordu
       hataObj: { status: "", mesaj: "" },
     };
   },
