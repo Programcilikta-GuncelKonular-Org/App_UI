@@ -36,7 +36,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(store.getters["auth/girisYapildiMi"]);
   if (to.meta.girisGerekliMi && !store.getters["auth/girisYapildiMi"]) {
     next("/login");
   } else if (!to.meta.girisGerekliMi && store.getters["auth/girisYapildiMi"]) {

@@ -15,6 +15,7 @@ export default {
         .dispatch("auth/KullaniciGirisi", e)
         .then(() => {
           const redirectUrl = "/" + (this.$route.query.redirect || "listele");
+          alert(this.$store.getters["auth/girisYapıldıMı"])
           this.$router.push(redirectUrl);
         })
         .catch((err) => {

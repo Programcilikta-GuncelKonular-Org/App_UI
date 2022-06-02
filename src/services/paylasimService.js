@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:8080/";
-import headerUret from "@/helpers/headerOlustur.js";
+import headerUret  from "@/helpers/headerOlustur";
 
 const paylasimlariGetir = async () => {
   return await fetch(`${BASE_URL}api/bilgiler`, {
