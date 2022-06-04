@@ -1,4 +1,5 @@
 <template>
+  <h1 v-show="bilgiVarMi">Görüntülenecek bilgi yok</h1>
   <cmpListeleme :elemanlar="elemanlarList" />
 </template>
 
@@ -21,7 +22,7 @@ export default {
         /**
          * getter kullanımı
          * */
-         this.elemanlarList = this.$store.getters["bilgiler/paylasimlariGetir"]
+        this.elemanlarList = this.$store.getters["bilgiler/paylasimlariGetir"];
         // this.elemanlarList = this.$store.state.bilgiler.storePaylasimlar;
       } catch (err) {
         console.log("hata oluştu - ", err);
@@ -33,8 +34,17 @@ export default {
     //lifecycle hooks
     this.paylasimlariAl();
   },
+  computed: {
+    bilgiVarMi() {
+      return this.$store.getters["bilgiler/paylasimlarGeldimi"];
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
+h1 {
+  color: white;
+  text-align: center;
+}
 </style>

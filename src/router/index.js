@@ -27,6 +27,7 @@ const routes = [
   {
     path: "/:notFound(.*)",
     component: NotFound,
+    meta: { girisGerekliMi: true },
   },
 ];
 

@@ -22,10 +22,6 @@ export default {
         .dispatch("auth/KullaniciGirisi", e) //action tetikler
         .then(() => {
           const redirectUrl = "/" + (this.$route.query.redirect || "listele");
-          // alert(this.$store.getters["auth/girisYapıldıMı"]);
-          
-          //storage doldur
-          alert("local stor - ", localStorage.getItem("kullanici"));
           this.$router.push(redirectUrl);
         })
         .catch((err) => {
