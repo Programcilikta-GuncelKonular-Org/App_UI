@@ -1,5 +1,6 @@
 export default {
     KullaniciDepola(state, payload){
-        state.kullanici = payload.mesaj;
+        console.log("payload - ", payload);
+        state.kullanici = payload.data.mesaj;
     }
 }
