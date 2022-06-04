@@ -3,6 +3,6 @@ export default {
     return state.storePaylasimlar;
   },
   paylasimlarGeldimi(state) {
-    return !!state.storePaylasimlar;
+    return !state.storePaylasimlar.length > 0;
   },
 };
