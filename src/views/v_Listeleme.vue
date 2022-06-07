@@ -86,7 +86,8 @@ export default {
         // this.elemanlarList = this.$store.state.bilgiler.storePaylasimlar;
       } catch (err) {
         console.log("hata oluştu - ", err);
-        alert("Hata oluştu\n" + err);
+        localStorage.removeItem("kullanici");
+        this.$router.push("/login");
       }
     },
 

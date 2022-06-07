@@ -10,9 +10,13 @@ const paylasimlariGetir = async () => {
       if (response.status === 200) {
         return await response.json(); //parse
       }
+      else{
+        throw await response.json(); //hata halinde login sayfasına yönlenmeli, yönelenebilmesi için hata yakalanmalı
+      }
     })
     .catch((err) => {
-      throw new Error(err);
+      console.log("servis ", err);
+      throw err.hataMesajı;
     });
 };
 const paylasimEkle = async (paylasim) => {
