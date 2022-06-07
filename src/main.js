@@ -8,6 +8,7 @@ import store from "./store";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import NavBar from "@/components/layout/NavBar.vue";
 import Card_v from "@/components/ui/Card";

@@ -1,5 +1,6 @@
 const BASE_URL = "http://localhost:8080/";
-import headerUret  from "@/helpers/headerOlustur";
+import headerUret from "@/helpers/headerOlustur";
+import axios from "axios";
 
 const paylasimlariGetir = async () => {
   return await fetch(`${BASE_URL}api/bilgiler`, {
@@ -14,5 +15,15 @@ const paylasimlariGetir = async () => {
       throw new Error(err);
     });
 };
+const paylasimEkle = async (paylasim) => {
+  // console.log("servis - ", paylasim);
+  return await axios.post(
+    `${BASE_URL}api/bilgiekle`,
+    { bilgiMetni: paylasim, yapilanYorumlar: [], begeniler: [] },
+    {
+      headers: headerUret(),
+    }
+  );
+};
 
-export { paylasimlariGetir };
+export { paylasimlariGetir, paylasimEkle };

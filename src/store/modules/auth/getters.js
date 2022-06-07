@@ -5,4 +5,10 @@ export default {
   tokenAl(state) {
     return state.kullanici.tokens;
   },
+  aktifKullaniciAl(state) {
+    return state.kullanici.kAdi;
+  },
+  kullaniciAdminMi(state) {
+    return state.kullanici.rol;
+  }
 };

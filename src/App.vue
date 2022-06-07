@@ -9,7 +9,7 @@
       </div>
 
       <div class="col-2 customPadding">
-        <AktifKull v-if="kullaniciGisiYapildiMi" />
+        <AktifKull v-if="kullaniciGisiYapildiMi && rolAdminMi" />
       </div>
       <div class="col-2"></div>
     </div>
@@ -21,6 +21,9 @@ export default {
   computed: {
     kullaniciGisiYapildiMi() {
       return this.$store.getters["auth/girisYapildiMi"];
+    },
+    rolAdminMi() {
+      return this.$store.getters["auth/kullaniciAdminMi"];
     },
   },
 };

@@ -3,8 +3,26 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">B-P-P</a>
     </div>
-    <button type="button" class="btn btn-success" v-if="kullaniciGisiYapildiMi" @click="CikisYap">
-      Çıkış
+
+    <button
+      type="button"
+      class="btn btn-outline-dark position-relative "
+      v-if="kullaniciGisiYapildiMi"
+      @click="CikisYap"
+    > Çıkış
+      <span
+        class="
+          position-absolute
+          top-0
+          start-100
+          translate-middle
+          badge
+          rounded-pill
+          bg-danger
+        "
+      >
+        {{ aktifKullanici }}
+      </span>
     </button>
   </nav>
 </template>
@@ -14,6 +32,9 @@ export default {
   computed: {
     kullaniciGisiYapildiMi() {
       return this.$store.getters["auth/girisYapildiMi"];
+    },
+    aktifKullanici() {
+      return this.$store.getters["auth/aktifKullaniciAl"];
     },
   },
   methods: {
@@ -27,6 +48,7 @@ export default {
 
 <style scoped>
 button {
-  margin-right: 15px;
+  margin-right: 2.5rem;
+  margin-top: 1rem;
 }
 </style>

@@ -1,4 +1,4 @@
-import { paylasimlariGetir } from "@/services/paylasimService.js";
+import { paylasimlariGetir, paylasimEkle } from "@/services/paylasimService.js";
 
 export default {
   async BilgileriAl(context) {
@@ -9,6 +9,16 @@ export default {
       .catch((err) => {
         context.commit("PaylasimDepola", err);
         throw new Error(err);
+      });
+  },
+  async BilgiEkle(_, param) {
+    console.log("action - ", param);
+    await paylasimEkle(param)
+      .then((response) => {
+        console.log("response kayıt - ", response);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 };
