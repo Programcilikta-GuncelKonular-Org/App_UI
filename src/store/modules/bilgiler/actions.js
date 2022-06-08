@@ -18,7 +18,8 @@ export default {
         console.log("response kayıt - ", response);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.hataMesaji);
+        throw err.response.data.hataMesaji;
       });
   },
 };

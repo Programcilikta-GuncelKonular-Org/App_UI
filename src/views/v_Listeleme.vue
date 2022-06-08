@@ -10,12 +10,19 @@
     <i class="bi bi-bag-plus-fill"> Ekle</i>
   </button>
   <cmpListeleme :elemanlar="elemanlarList" />
+  <!-- 
+    kullanıcı hata aldıktan sora kapat butonuna basmadan modalı kapattığında 
+    bir sonraki modalı açtığında hata mesajını görüntülüyordu
+    back drop işlemini yakalayacak metodu bulmak için vakit harcamak yerine 
+    data-bs-backdrop="static" ile modal sadece kapat butonu ile kapanabilir hale getirildi 
+  -->
   <div
     class="modal fade"
     id="girisModal"
     tabindex="-1"
     aria-labelledby="girisModal"
-    aria-hidden="true"
+    aria-hidden="false"
+    data-bs-backdrop="static"
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -29,7 +36,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="bilgiyiGönder;">
+          <form @submit.prevent="bilgiyiGönder()">
             <div class="input-group">
               <textarea
                 class="form-control"
@@ -38,10 +45,12 @@
               ></textarea>
             </div>
           </form>
+          <p class="m-2" v-if="hata">{{ hata }}</p>
         </div>
         <div class="modal-footer">
           <button
             type="button"
+            @click="modalTemizle()"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
@@ -49,9 +58,9 @@
           </button>
           <button
             type="submit"
+            @click="bilgiyiGönder()"
             class="btn btn-primary"
-            data-bs-dismiss="modal"
-            @click="bilgiyiGönder"
+            :data-bs-dismiss="modal"
           >
             Kaydet
           </button>
@@ -73,6 +82,8 @@ export default {
       elemanlarList: [],
       goruntule: false,
       inputBilgiMetni: "",
+      modal: "",
+      hata: "",
     };
   },
   methods: {
@@ -92,10 +103,36 @@ export default {
     },
 
     bilgiyiGönder() {
-      console.warn(this.inputBilgiMetni);
-      this.$store.dispatch("bilgiler/BilgiEkle", this.inputBilgiMetni);
+      /**
+       * bilgiMetni boş kontrolü front-end tarafında yapılmamışsa
+       * back-end tarafından dönen hatayı yakalanmalı
+       *
+       * hata adındaki property ye hata mesajı atanarak kullanıcıya gösterilmiş oldu
+       * kullanıcı boş paylaşım yapıp hata aldıktan sonra kapat butonuna tıklayıp
+       * modalı kapttığında, bir sonraki modalı açtığında hata mesajını görmemesi için
+       * hata property si temizlenmeli (121. satırdaki metod)
+       *
+       * kullanıcı bilgi baylaşırken sürece ara verdi ve kapat butonuna tıklayarak modalı kapattı,
+       * bir sonraki sefere modalı temiz görmesi için
+       * bilgiMetni property sinin içi temizlenmei (121. satırdaki metod)
+       */
+
+      this.$store
+        .dispatch("bilgiler/BilgiEkle", this.inputBilgiMetni)
+        .then(() => {
+          this.modal = "modal"; // modal kapatması için ikinciye butona basılması gereiyor???
+          this.paylasimlariAl();
+          this.modalTemizle();
+        })
+        .catch((err) => {
+          console.log("comp hata - ", err);
+          this.modal = "";
+          this.hata = err + "\n Boş paylaşım yapmadığınızdan emin olun.";
+        });
+    },
+    modalTemizle() {
+      this.hata = "";
       this.inputBilgiMetni = "";
-      this.paylasimlariAl();
     },
   },
   mounted() {
@@ -117,5 +154,9 @@ export default {
 h1 {
   color: white;
   text-align: center;
+}
+
+p {
+  color: red;
 }
 </style>
