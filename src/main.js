@@ -14,7 +14,10 @@ import NavBar from "@/components/layout/NavBar.vue";
 import Card_v from "@/components/ui/Card";
 import OnlineKullanicilar from "@/components/OnlineKullanicilar";
 
+import io from "socket.io-client";
+
 const app = createApp(App);
+app.config.globalProperties.$socketio = io("http://localhost:8090");
 
 app
   .use(store)

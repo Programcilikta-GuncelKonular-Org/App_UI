@@ -137,7 +137,27 @@ export default {
   },
   mounted() {
     //lifecycle hooks
-    this.paylasimlariAl();
+    const girisYapildiMi = this.$store.getters["auth/girisYapildiMi"];
+
+    if (girisYapildiMi) {
+      this.paylasimlariAl();
+      const kullaniciAdi = this.$store.getters["auth/aktifKullaniciAl"];
+      this.$socketio.emit("connection", (response) => {
+        console.log("server cevap - ", response);
+      });
+
+      this.$socketio.on("girisYapanKullaniciCevap", (response) => {
+        console.log(response);
+      });
+
+      this.$socketio.emit(
+        "girisYapanKullanici",
+        { kAdi: kullaniciAdi },
+        (response) => {
+          console.log(response);
+        }
+      );
+    }
   },
   computed: {
     bilgiVarMi() {

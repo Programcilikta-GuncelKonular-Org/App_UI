@@ -12,7 +12,7 @@ export default {
       });
   },
   async BilgiEkle(_, param) {
-    console.log("action - ", param);
+    // console.log("action - ", param);
     await paylasimEkle(param)
       .then((response) => {
         console.log("response kayıt - ", response);
