@@ -5,15 +5,21 @@
     </h5>
     <ul class="list-group">
       <div class="container"></div>
-      <li class="list-group-item">Kullanıcı 1</li>
-      <li class="list-group-item">Kullanıcı 2</li>
-      <li class="list-group-item">...</li>
+      <li
+        class="list-group-item"
+        v-for="kullanici in onlineKullanicilar"
+        :key="kullanici.sId"
+      >
+        <i class="bi bi-router-fill"></i> {{ kullanici.kAdi }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["onlineKullanicilar"],
+};
 </script>
 
 <style>

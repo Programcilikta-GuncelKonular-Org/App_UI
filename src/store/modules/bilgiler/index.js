@@ -8,6 +8,7 @@ export default {
     return {
       storePaylasimlar: [],
       hataObj: { status: "", mesaj: "" },
+      onlineKullanicilar: [],
     };
   },
   mutations,

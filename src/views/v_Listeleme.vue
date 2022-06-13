@@ -1,5 +1,4 @@
 <template>
-  <h1 v-show="bilgiVarMi">Görüntülenecek bilgi yok</h1>
   <button
     type="button"
     class="btn btn-secondary mb-2"
@@ -9,6 +8,10 @@
   >
     <i class="bi bi-bag-plus-fill"> Ekle</i>
   </button>
+  <h1 v-show="bilgiVarMi">Görüntülenecek bilgi yok</h1>
+  <div class="d-flex justify-content-center">
+    <Spinner v-if="yukleniyor" />
+  </div>
   <cmpListeleme :elemanlar="elemanlarList" />
   <!-- 
     kullanıcı hata aldıktan sora kapat butonuna basmadan modalı kapattığında 
@@ -81,6 +84,7 @@ export default {
     return {
       elemanlarList: [],
       goruntule: false,
+      yukleniyor: false,
       inputBilgiMetni: "",
       modal: "",
       hata: "",
@@ -89,13 +93,16 @@ export default {
   methods: {
     async paylasimlariAl() {
       try {
+        this.yukleniyor = true;
         await this.$store.dispatch("bilgiler/BilgileriAl");
         /**
          * getter kullanımı
          * */
         this.elemanlarList = this.$store.getters["bilgiler/paylasimlariGetir"];
+        this.yukleniyor = false;
         // this.elemanlarList = this.$store.state.bilgiler.storePaylasimlar;
       } catch (err) {
+        this.yukleniyor = false;
         console.log("hata oluştu - ", err);
         localStorage.removeItem("kullanici");
         this.$router.push("/login");
@@ -138,25 +145,21 @@ export default {
   mounted() {
     //lifecycle hooks
     const girisYapildiMi = this.$store.getters["auth/girisYapildiMi"];
+    const rolAdminMi = this.$store.getters["auth/kullaniciAdminMi"];
 
     if (girisYapildiMi) {
       this.paylasimlariAl();
-      const kullaniciAdi = this.$store.getters["auth/aktifKullaniciAl"];
-      this.$socketio.emit("connection", (response) => {
-        console.log("server cevap - ", response);
-      });
+      if (rolAdminMi) {
+        this.$store.dispatch("bilgiler/AdminSocketGiris");
+      } else {
+        const kullaniciAdi = this.$store.getters["auth/aktifKullaniciAl"];
 
-      this.$socketio.on("girisYapanKullaniciCevap", (response) => {
-        console.log(response);
-      });
+        // this.$socketio.emit("connection", { kAdi: "deneme" }, (response) => {
+        //   console.log("server cevap - ", response);
+        // });
 
-      this.$socketio.emit(
-        "girisYapanKullanici",
-        { kAdi: kullaniciAdi },
-        (response) => {
-          console.log(response);
-        }
-      );
+        this.$store.dispatch("bilgiler/KullaniciSockerGiris", kullaniciAdi);
+      }
     }
   },
   computed: {

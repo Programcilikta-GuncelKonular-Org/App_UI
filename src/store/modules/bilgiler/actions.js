@@ -1,4 +1,6 @@
 import { paylasimlariGetir, paylasimEkle } from "@/services/paylasimService.js";
+import io from "socket.io-client";
+const socket = io("http://localhost:8090");
 
 export default {
   async BilgileriAl(context) {
@@ -21,5 +23,33 @@ export default {
         console.log(err.response.data.hataMesaji);
         throw err.response.data.hataMesaji;
       });
+  },
+  AdminSocketGiris(context) {
+    socket.emit("adminGirisi", (response) => {
+      console.log("adminGiris response - ", response);
+    });
+    socket.on("girisYapanKullanici", ({ data }) => {
+      context.commit("OnlineKullanicilarDepola", data);
+    });
+    socket.on("cikisYapanKullanici", ({ data }) => {
+      context.commit("OnlineKullanicilarDuzenle", data);
+    });
+  },
+  KullaniciSockerGiris(context, kullaniciAdi) {
+    socket.emit(
+      "kullaniciGirisi",
+      {
+        data: {
+          kAdi: kullaniciAdi,
+        },
+      },
+      (response) => {
+        console.log("kullanıcıSocketGiris response - ", response);
+      }
+    );
+
+    // socket.on("disconnect", (response) => {
+    //   console.log("çıkış yapan kullanıcı - ", response);
+    // });
   },
 };

@@ -5,4 +5,7 @@ export default {
   paylasimlarGeldimi(state) {
     return !state.storePaylasimlar.length > 0;
   },
+  onlineKullanicilariAl(state) {
+    return state.onlineKullanicilar;
+  },
 };
