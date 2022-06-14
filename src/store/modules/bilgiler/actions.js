@@ -34,6 +34,9 @@ export default {
     socket.on("cikisYapanKullanici", ({ data }) => {
       context.commit("OnlineKullanicilarDuzenle", data);
     });
+    socket.on("girisYapmisKullanicilar", ({ data }) => {
+      context.commit("GirisYapanlariDuzenle", data);
+    });
   },
   KullaniciSockerGiris(context, kullaniciAdi) {
     socket.emit(

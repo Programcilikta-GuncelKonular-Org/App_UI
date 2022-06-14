@@ -9,10 +9,14 @@ export default {
     state.onlineKullanicilar.push(payload);
   },
   OnlineKullanicilarDuzenle(state, payload) {
-    // console.log("mutation disconnect - ", payload);
     const online = state.onlineKullanicilar;
     state.onlineKullanicilar = online.filter((kullanici) => {
       return kullanici.sId != payload.sId;
+    });
+  },
+  GirisYapanlariDuzenle(state, payload) {
+    payload.kullanicilar.forEach((kisi) => {
+      state.onlineKullanicilar.push(kisi.data);
     });
   },
 };
